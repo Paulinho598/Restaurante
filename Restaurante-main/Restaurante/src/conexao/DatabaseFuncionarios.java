@@ -51,14 +51,14 @@ public class DatabaseFuncionarios {
             throw new RuntimeException(e);
         }
     }
-    public List<funcionarios> readAll() {
+    public List<funcionarios> readAll(int id) {
         List<funcionarios> func = new ArrayList<>();
-        String query = "SELECT * FROM Funcionarios";
+        String query = "SELECT * FROM Funcionarios WHERE ID_func = ?";
         try ( 
             Connection conn = getConnection();   
-            PreparedStatement stmt = conn.prepareStatement(query);
-            ResultSet rs = stmt.executeQuery()
-        ) {
+            PreparedStatement stmt = conn.prepareStatement(query)){
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 func.add(new funcionarios(
                     rs.getString("CPF"),

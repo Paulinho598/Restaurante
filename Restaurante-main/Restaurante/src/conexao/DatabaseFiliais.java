@@ -42,14 +42,14 @@ public class DatabaseFiliais {
             throw new RuntimeException(e);
         }
     }
-    public List<filiais> readAll() {
+    public List<filiais> readAll(int id) {
         List<filiais> filial = new ArrayList<>();
-        String query = "SELECT * FROM Filiais";
+        String query = "SELECT * FROM Filiais WHERE ID_filial = ?";
         try ( 
             Connection conn = getConnection();   
-            PreparedStatement stmt = conn.prepareStatement(query);
-            ResultSet rs = stmt.executeQuery()
-        ) {
+            PreparedStatement stmt = conn.prepareStatement(query)){
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 filial.add(new filiais(
                     rs.getString("Endereco"), 

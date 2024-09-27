@@ -40,14 +40,14 @@ public class DatabaseEstoque {
             throw new RuntimeException(e);
         }
     }
-    public List<estoque> readAll() {
+    public List<estoque> readAll(int id) {
         List<estoque> func = new ArrayList<>();
-        String query = "SELECT * FROM Estoque";
+        String query = "SELECT * FROM Estoque where ID_materia = ?";
         try ( 
             Connection conn = getConnection();   
-            PreparedStatement stmt = conn.prepareStatement(query);
-            ResultSet rs = stmt.executeQuery()
-        ) {
+            PreparedStatement stmt = conn.prepareStatement(query)){
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 func.add(new estoque(
                 rs.getInt("ID_fornecedor"),rs.getInt("Quantidade"),rs.getInt("ID_filial")));

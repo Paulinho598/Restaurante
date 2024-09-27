@@ -40,14 +40,14 @@ public class DatabasePratos {
             throw new RuntimeException(e);
         }
     }
-    public List<pratos> readAll() {
+    public List<pratos> readAll(int id) {
         List<pratos> prato = new ArrayList<>();
-        String query = "SELECT * FROM Pratos";
+        String query = "SELECT * FROM Pratos WHERE ID_prato = ?";
         try ( 
             Connection conn = getConnection();   
-            PreparedStatement stmt = conn.prepareStatement(query);
-            ResultSet rs = stmt.executeQuery()
-        ) {
+            PreparedStatement stmt = conn.prepareStatement(query)){
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 prato.add(new pratos(rs.getString("Nome"),rs.getString("Descricao"),rs.getDouble("Valor")));
             }

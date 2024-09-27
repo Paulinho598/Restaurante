@@ -46,14 +46,14 @@ public class DatabaseReserva {
             throw new RuntimeException(e);
         }
     }
-    public List<reservas> readAll() {
+    public List<reservas> readAll(int id) {
         List<reservas> func = new ArrayList<>();
-        String query = "SELECT * FROM Reservas";
+        String query = "SELECT * FROM Reservas WHERE ID_reserva = ?";
         try ( 
             Connection conn = getConnection();   
-            PreparedStatement stmt = conn.prepareStatement(query);
-            ResultSet rs = stmt.executeQuery()
-        ) {
+            PreparedStatement stmt = conn.prepareStatement(query)){
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 func.add(new reservas(
                 rs.getDate("Data_reserva"),

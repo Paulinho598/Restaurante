@@ -49,14 +49,14 @@ public class DatabasePedidos {
             throw new RuntimeException(e);
         }
     }
-    public List<pedidos> readAll() {
+    public List<pedidos> readAll(int id) {
         List<pedidos> pedido = new ArrayList<>();
-        String query = "SELECT * FROM Pedidos";
+        String query = "SELECT * FROM Pedidos WHERE ID_pedido = ?";
         try ( 
             Connection conn = getConnection();   
-            PreparedStatement stmt = conn.prepareStatement(query);
-            ResultSet rs = stmt.executeQuery()
-        ) {
+            PreparedStatement stmt = conn.prepareStatement(query)){
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 pedido.add(new pedidos(
                 rs.getInt("ID_cliente"),

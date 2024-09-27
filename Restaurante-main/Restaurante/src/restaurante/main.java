@@ -43,6 +43,7 @@ public class main extends javax.swing.JFrame {
         CadastroFornecedores = new javax.swing.JButton();
         CadastroIngredientes = new javax.swing.JButton();
         CadastroEntregas = new javax.swing.JButton();
+        Pesquisa = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -137,6 +138,13 @@ public class main extends javax.swing.JFrame {
             }
         });
 
+        Pesquisa.setText("Pesquisa");
+        Pesquisa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PesquisaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -174,13 +182,16 @@ public class main extends javax.swing.JFrame {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(CadastroBebidas)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(CadastroIngredientes))))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(153, 153, 153)
-                        .addComponent(CadastroPedidos)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CadastroEntregas)))
+                                        .addComponent(CadastroIngredientes)))))))
                 .addContainerGap(19, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(CadastroPedidos)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(CadastroEntregas)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Pesquisa)
+                .addGap(74, 74, 74))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -207,7 +218,8 @@ public class main extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CadastroPedidos)
-                    .addComponent(CadastroEntregas))
+                    .addComponent(CadastroEntregas)
+                    .addComponent(Pesquisa))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
                 .addComponent(Sair)
                 .addGap(28, 28, 28))
@@ -286,6 +298,11 @@ public class main extends javax.swing.JFrame {
         new cadastroPedido().setVisible(true);
     }//GEN-LAST:event_CadastroPedidosActionPerformed
 
+    private void PesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PesquisaActionPerformed
+        dispose();
+        new pesquisa().setVisible(true);
+    }//GEN-LAST:event_PesquisaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -334,6 +351,7 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JButton CadastroPedidos;
     private javax.swing.JButton CadastroPratos;
     private javax.swing.JButton CadastroReservas;
+    private javax.swing.JButton Pesquisa;
     private javax.swing.JButton Sair;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel subTitle_1;

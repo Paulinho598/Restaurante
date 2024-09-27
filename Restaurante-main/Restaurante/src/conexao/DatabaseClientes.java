@@ -49,14 +49,15 @@ public class DatabaseClientes {
             throw new RuntimeException(e);
         }
     }
-    public List<clientes> readAll() {
+    public List<clientes> readAll(int id) {
         List<clientes> cliente = new ArrayList<>();
-        String query = "SELECT * FROM Clientes";
+        String query = "SELECT * FROM Clientes where ID_cliente = ?";
         try ( 
             Connection conn = getConnection();   
-            PreparedStatement stmt = conn.prepareStatement(query);
-            ResultSet rs = stmt.executeQuery()
-        ) {
+            PreparedStatement stmt = conn.prepareStatement(query))
+        {
+            stmt.setInt(1,id);
+            ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 cliente.add(new clientes(
                     rs.getString("CPF"),

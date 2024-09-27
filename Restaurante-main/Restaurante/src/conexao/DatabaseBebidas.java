@@ -40,14 +40,16 @@ public class DatabaseBebidas {
             throw new RuntimeException(e);
         }
     }
-    public List<bebidas> readAll() {
+    public List<bebidas> readAll(int id) {
         List<bebidas> bebida = new ArrayList<>();
-        String query = "SELECT * FROM Bebidas";
+        String query = "SELECT * FROM Bebidas where ID_bebida = ?";
         try ( 
             Connection conn = getConnection();   
-            PreparedStatement stmt = conn.prepareStatement(query);
-            ResultSet rs = stmt.executeQuery()
-        ) {
+            PreparedStatement stmt = conn.prepareStatement(query)
+            )
+        {
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 bebida.add(new bebidas(rs.getString("Nome"),rs.getString("Descricao"),rs.getDouble("Valor")));
             }

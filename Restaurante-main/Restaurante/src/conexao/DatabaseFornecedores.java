@@ -43,14 +43,14 @@ public class DatabaseFornecedores {
             throw new RuntimeException(e);
         }
     }
-    public List<fornecedores> readAll() {
+    public List<fornecedores> readAll(int id) {
         List<fornecedores> fornecedor = new ArrayList<>();
-        String query = "SELECT * FROM Fornecedores";
+        String query = "SELECT * FROM Fornecedores WHERE ID_fornecedor = ?";
         try ( 
             Connection conn = getConnection();   
-            PreparedStatement stmt = conn.prepareStatement(query);
-            ResultSet rs = stmt.executeQuery()
-        ) {
+            PreparedStatement stmt = conn.prepareStatement(query)){
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 fornecedor.add(new fornecedores(
                 rs.getString("Nome"),
@@ -93,7 +93,7 @@ public class DatabaseFornecedores {
     
     public void delete(int id) {
         
-        String query = "DELETE FROM Fornecedores WHERE ID_reserva = ?";
+        String query = "DELETE FROM Fornecedores WHERE ID_fornecedor = ?";
         try (
             Connection conn = getConnection();
             PreparedStatement stmt = conn.prepareStatement(query)
